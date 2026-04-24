@@ -95,8 +95,23 @@ contract ScholarshipDisbursement {
 
     // Scholar claims their monthly tranche
     function claimStipend() external onlyScholar whenNotPaused {
-        // TO DO
+        Scholar storage scholar = scholars[msg.sender];
 
+        require(scholar.isEnrolled, "Scholar is not enrolled");
+        require(scholar.currentQPI <= scholar.requiredQPI, "QPI requirement not met");
+        require(scholar.monthsDisbursed < 5, "All tranches already claimed");
+
+        uint256 amount = scholar.monthlyTranche;
+
+        require(address(this).balance >= amount, "Insufficient contract balance");
+
+        // Effects
+        scholar.monthsDisbursed += 1;
+
+        // Interaction
+        payable(msg.sender).transfer(amount);
+
+        emit StipendDisbursed(msg.sender, amount, scholar.monthsDisbursed);
     }
 
     
