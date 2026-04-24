@@ -108,7 +108,7 @@ contract ScholarshipDisbursement {
         Scholar storage scholar = scholars[msg.sender];
 
         require(scholar.isEnrolled, "Scholar is not enrolled");
-        require(scholar.currentQPI <= scholar.requiredQPI, "QPI requirement not met");
+        require(scholar.currentQPI >= scholar.requiredQPI, "QPI requirement not met");
         require(scholar.monthsDisbursed < 5, "All tranches already claimed");
 
         uint256 amount = scholar.monthlyTranche;
