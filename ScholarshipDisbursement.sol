@@ -59,10 +59,11 @@ contract ScholarshipDisbursement {
 
 
     // --- Functions ---
+
     // Treasury funds the contract
     function depositFunds() external payable onlyTreasury {
-        // TO DO
-
+        require(msg.value > 0, "Deposit amount must be greater than 0");
+        emit FundsDeposited(msg.sender, msg.value);
     }
 
     // Admin registers a scholar
