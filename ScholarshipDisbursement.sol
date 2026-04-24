@@ -91,7 +91,16 @@ contract ScholarshipDisbursement {
     // Registrar verifies the student's status off-chain and updates it on-chain
     function verifyAcademicStatus(address _scholar, bool _isEnrolled, uint256 _currentQPI) external onlyRegistrar {
         // TO DO
+        require(scholars[_scholar].isActive, "Scholar is not eligible for stipend disbursement.");
+        Scholar storage scholar = scholars[_scholar];
+        scholar.isEnrolled = _isEnrolled;
+        scholar.currentQPI = _currentQPI;
 
+        if(!_isEnrolled || _currentQPI < scholar.requiredQPI){
+            scholar.isActive = false;
+        }
+
+        emit StatusVerified(_scholar, _isEnrolled, _currentQPI);
     }
 
     // Scholar claims their monthly tranche
