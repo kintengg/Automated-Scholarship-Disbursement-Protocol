@@ -119,7 +119,8 @@ contract ScholarshipDisbursement {
         scholar.monthsDisbursed += 1;
 
         // Interaction
-        payable(msg.sender).transfer(amount);
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        require(success, "Stipend transfer failed");
 
         emit StipendDisbursed(msg.sender, amount, scholar.monthsDisbursed);
     }
@@ -136,7 +137,8 @@ contract ScholarshipDisbursement {
     function emergencyWithdraw() external onlyTreasury {
         uint256 balance = address(this).balance;
         require(balance > 0, "No funds to withdraw");
-        payable(treasury).transfer(balance);
+        (bool success, ) = payable(treasury).call{value: balance}("");
+        require(success, "Emergency withdrawal failed");
         emit EmergencyWithdrawal(treasury, balance);
     }
 
