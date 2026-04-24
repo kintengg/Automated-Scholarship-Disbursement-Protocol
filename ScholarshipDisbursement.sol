@@ -70,6 +70,20 @@ contract ScholarshipDisbursement {
     function addScholar(address _wallet, uint256 _totalAllocation, uint256 _requiredQPI) external onlyAdmin {
         // TO DO
 
+        require(!scholars[_wallet].isActive, "Scholar is already registered.");
+
+        scholars[_wallet] = Scholar({
+            totalAllocation: _totalAllocation,
+            monthlyTranche: (_totalAllocation / 5),
+            requiredQPI: _requiredQPI,
+            currentQPI: 0,
+            isEnrolled: false,
+            monthsDisbursed: 0,
+            isActive: true
+        });
+
+        emit ScholarAdded(_wallet, _totalAllocation);
+        
     }
 
     // Registrar verifies the student's status off-chain and updates it on-chain
@@ -108,7 +122,7 @@ contract ScholarshipDisbursement {
     event StatusVerified(address indexed scholar, bool isEnrolled, uint256 currentQPI);
     event StipendDisbursed(address indexed scholar, uint256 amount, uint8 trancheNumber);
     event EmergencyWithdrawal(address indexed treasury, uint256 amount);
-
+    
 
 
     // Read-only function to check contract balance
