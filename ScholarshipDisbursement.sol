@@ -71,6 +71,7 @@ contract ScholarshipDisbursement {
     function addScholar(address _wallet, uint256 _totalAllocation, uint256 _requiredQPI) external onlyAdmin {
         // TO DO
 
+        require(_totalAllocation > 0, "Total allocation must be greater than 0.");
         require(!scholars[_wallet].isActive, "Scholar is already registered.");
 
         scholars[_wallet] = Scholar({
