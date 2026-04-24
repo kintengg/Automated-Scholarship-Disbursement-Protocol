@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 contract ScholarshipDisbursement {
     // --- State Variables ---
-    address public admin;       // OAA 
+    address public admin;       
     address public treasury;    
     address public registrar;   
     bool public isPaused;       
@@ -58,7 +58,33 @@ contract ScholarshipDisbursement {
     }
 
 
-    // - Functions -
+    // --- Functions ---
+    // Treasury funds the contract
+    function depositFunds() external payable onlyTreasury {
+        // TO DO
+
+    }
+
+    // Admin registers a scholar
+    // Note: Allocations should be inputted in wei. QPI should be scaled by 100 (e.g., 250 for 2.5).
+    function addScholar(address _wallet, uint256 _totalAllocation, uint256 _requiredQPI) external onlyAdmin {
+        // TO DO
+
+    }
+
+    // Registrar verifies the student's status off-chain and updates it on-chain
+    function verifyAcademicStatus(address _scholar, bool _isEnrolled, uint256 _currentQPI) external onlyRegistrar {
+        // TO DO
+
+    }
+
+    // Scholar claims their monthly tranche
+    function claimStipend() external onlyScholar whenNotPaused {
+        // TO DO
+
+    }
+
+    
 
 
 
@@ -67,6 +93,12 @@ contract ScholarshipDisbursement {
         isPaused = !isPaused;
     }
 
+    function emergencyWithdraw() external onlyTreasury {
+        uint256 balance = address(this).balance;
+        require(balance > 0, "No funds to withdraw");
+        payable(treasury).transfer(balance);
+        emit EmergencyWithdrawal(treasury, balance);
+    }
 
 
 

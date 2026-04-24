@@ -129,6 +129,29 @@
 				"type": "event"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_wallet",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_totalAllocation",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_requiredQPI",
+						"type": "uint256"
+					}
+				],
+				"name": "addScholar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "admin",
 				"outputs": [
@@ -139,6 +162,27 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimStipend",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "depositFunds",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "emergencyWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -248,6 +292,29 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_scholar",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isEnrolled",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_currentQPI",
+						"type": "uint256"
+					}
+				],
+				"name": "verifyAcademicStatus",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -278,11 +345,11 @@
 	},
 	"sources": {
 		"ScholarshipDisbursement.sol": {
-			"keccak256": "0xb00f61b02b1cd41eea172868d1f6763e459f94c69a302a83ec6f6c582ab4c0d6",
+			"keccak256": "0x0921a01ba437cac880d8f378a62f8d95d01a40b05c365d42ba50a4a799b3159b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4df969261c2ec2da0f18ab7bcea4e31cd1f38f082540b18e9d234a98bff18847",
-				"dweb:/ipfs/QmTXdwJjqqyAPtV22WcyN4QnN3mZZwdZ32Z5JT8zXJV2LW"
+				"bzz-raw://ae5f705cc8269ef0def13f7c3eb4527dac7f318e7ad9bccaedf7630203071329",
+				"dweb:/ipfs/QmZn7DtPbuPVpWCyRPBSJMVZFssYE4reZJ7BDpScqAA1or"
 			]
 		}
 	},
